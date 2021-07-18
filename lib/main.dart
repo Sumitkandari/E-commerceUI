@@ -22,6 +22,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     
+    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'E-commerce UI',
@@ -30,6 +31,9 @@ class _MyAppState extends State<MyApp> {
       ),
       
         home:Scaffold(
+          resizeToAvoidBottomInset: false,
+          
+          
       drawer: Drawer(),
       appBar: AppBar(
         toolbarHeight: 80,
@@ -43,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
-        title: Text("ISSACS",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+        title: Text("FlopKart",style: TextStyle(fontSize: 30,color: Colors.black,fontWeight: FontWeight.bold),),
          leading:Builder(
           builder: (context) => InkWell(
             child: Icon(Icons.filter_list_sharp,color: Colors.black,),
@@ -62,8 +66,10 @@ class _MyAppState extends State<MyApp> {
         
       ),
       floatingActionButton: FloatingActionButton(
+        
         onPressed: (){},
         backgroundColor: Colors.purple,
+
         child: Icon(Icons.qr_code_scanner_sharp),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
