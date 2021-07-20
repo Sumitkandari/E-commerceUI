@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:ecommerceui/pages/detail.dart';
 import 'package:ecommerceui/pages/tabicon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -14,6 +15,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+   bool isFavourite;
   List<Product> _product=[
     Product(
         image: "assets/1.jpg",
@@ -155,12 +157,14 @@ class _HomepageState extends State<Homepage> {
                 crossAxisCount: 4,
                 itemCount: _product.length,
                 itemBuilder: (BuildContext context,int index){
-                    return _productItem(
-                      title:_product[index].title,
-                      image:_product[index].image,
-                      price:_product[index].price.toString(),
-                      isFavourite:Random().nextBool(),
+                    return  _productItem(
+                        title:_product[index].title,
+                        image:_product[index].image,
+                        price:_product[index].price.toString(),
+                        isFavourite:Random().nextBool(),
+                        index:index
 
+                      
                     );
                 }, 
                 staggeredTileBuilder: (int index)=> new StaggeredTile.fit(2),
@@ -183,7 +187,7 @@ class _HomepageState extends State<Homepage> {
         
         child: Theme(
           data:Theme.of(context).copyWith(
-              accentColor: Colors.purple,
+              accentColor: Colors.blue[900],
           ),
                   child: TextField(
             
@@ -210,83 +214,92 @@ class _HomepageState extends State<Homepage> {
         ),
       );
     }
-    Widget _productItem({String title,String image,String price,bool isFavourite}){
-      return Container(
-        padding: EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color:Colors.grey.shade200,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Stack(
-              children: [
-                Stack(
-                  children: [
-                    Positioned.fill(child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 10,
-                        width: 90,
-                        decoration: BoxDecoration(
-                          color:Colors.grey.shade200,
-                          borderRadius: BorderRadius.all(
-                            Radius.elliptical(100, 25),
-                          )
+    Widget _productItem({String title,String image,String price,bool isFavourite,int index}){
+      return GestureDetector(
+        onTap: (){
+             Navigator.of(context).push(MaterialPageRoute(builder:(context)=>DetailPage(
+                         product:_product[index],
+                         isfavour:isFavourite,)));
+                    
 
+        },
+              child: Container(
+          padding: EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color:Colors.grey.shade200,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Stack(
+                children: [
+                  Stack(
+                    children: [
+                      Positioned.fill(child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 10,
+                          width: 90,
+                          decoration: BoxDecoration(
+                            color:Colors.grey.shade200,
+                            borderRadius: BorderRadius.all(
+                              Radius.elliptical(100, 25),
+                            )
+
+                          ),
                         ),
+
+                      )
                       ),
-
-                    )
-                    ),
-                    Center(
-                      child:Image.asset(image,
-                      width: 200,fit: BoxFit.cover,
-                      ) ,
-                      
-                    )
-                  ],
-                ),
-                Align(
-                  alignment :Alignment.topRight,
-                  child: Container(
-                    height: 30,
-                    width: 30,
-                    padding: EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: isFavourite?Colors.pink.shade100:Colors.grey.shade200
-                    ),
-                    child: Icon(
-                      Icons.favorite,
-                      color: isFavourite?Colors.pink:Colors.grey,size: 20,
-                    ),
+                      Center(
+                        child:Image.asset(image,
+                        width: 200,fit: BoxFit.cover,
+                        ) ,
+                        
+                      )
+                    ],
                   ),
+                  Align(
+                    alignment :Alignment.topRight,
+                    child: Container(
+                      height: 30,
+                      width: 30,
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: isFavourite?Colors.pink.shade100:Colors.grey.shade200
+                      ),
+                      child: Icon(
+                        Icons.favorite,
+                        color: isFavourite?Colors.pink:Colors.grey,size: 20,
+                      ),
+                    ),
 
-                )
-              ],
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(title,style:TextStyle(fontWeight:FontWeight.bold,fontSize: 15
-            
-            )
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Row(
-              mainAxisAlignment:MainAxisAlignment.spaceBetween,
-              children:<Widget>[
-                
-                Text("\$ $price",style: TextStyle(fontWeight:FontWeight.bold),)
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(title,style:TextStyle(fontWeight:FontWeight.bold,fontSize: 15
+              
+              )
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Row(
+                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                children:<Widget>[
+                  
+                  Text("\$ $price",style: TextStyle(fontWeight:FontWeight.bold),)
 
-              ]
-            )
-          ],
-        ) ,
+                ]
+              )
+            ],
+          ) ,
+        ),
       );
 
 

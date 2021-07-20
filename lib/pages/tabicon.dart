@@ -26,7 +26,7 @@ class Tabitems extends StatelessWidget {
           
           
           children: <Widget>[
-            Icon(icon,color:isselected? Colors.purple:Colors.grey,size: 40,),
+            Icon(icon,color:isselected? Colors.blue[900]:Colors.grey,size: 40,),
             
 
           ],

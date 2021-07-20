@@ -1,6 +1,7 @@
 import 'package:ecommerceui/pages/homepage.dart';
 import 'package:ecommerceui/pages/tabicon.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 //flutter run -d chrome --web-port=8080 --web-hostname=127.0.0.1
 
 
@@ -27,7 +28,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'E-commerce UI',
      theme: ThemeData(
-        primarySwatch: Colors.purple// default value
+        primarySwatch: Colors.blue// default value
       ),
       
         home:Scaffold(
@@ -36,9 +37,10 @@ class _MyAppState extends State<MyApp> {
           
       drawer: Drawer(),
       appBar: AppBar(
+        
         toolbarHeight: 80,
         actions: <Widget>[
-          IconButton(onPressed: (){}, icon: Icon(Icons.card_travel,color: Colors.black,)),
+          IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart,color: Colors.black,)),
           SizedBox(
             width: 10,
           ),
@@ -68,7 +70,7 @@ class _MyAppState extends State<MyApp> {
       floatingActionButton: FloatingActionButton(
         
         onPressed: (){},
-        backgroundColor: Colors.purple,
+        backgroundColor: Colors.blue[900],
 
         child: Icon(Icons.qr_code_scanner_sharp),
       ),
@@ -144,7 +146,7 @@ class _MyAppState extends State<MyApp> {
              _isselected=2;
            });
          },),
-         Tabitems(icon:Icons.photo,isselected: _isselected==3 ,onTap: (){
+         Tabitems(icon:Icons.account_circle_rounded,isselected: _isselected==3 ,onTap: (){
            setState(() {
              _isselected=3;
            });
